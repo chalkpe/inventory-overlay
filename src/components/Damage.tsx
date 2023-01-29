@@ -14,7 +14,7 @@ const Damage: React.FC<Props> = ({ content }) => {
 
     const percentage = (content.maxDurability - content.damage) / content.maxDurability
     const styles: CSSProperties = {
-        width: `calc(${(percentage * 100).toFixed(1)}% - 4px)`,
+        width: `${(percentage * 100).toFixed(1)}%`,
         backgroundColor: colors[Math.floor(percentage * colors.length)]
     }
 
