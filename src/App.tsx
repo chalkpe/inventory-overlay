@@ -1,24 +1,29 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import './App.css'
+import { useEffect, useState } from 'react'
+import useWebSocket from 'react-use-websocket'
+import Inventory from './components/Inventory'
+import type { OverlayMessage } from './types/overlay'
 
 function App() {
+  const params = new URLSearchParams(window.location.search)
+  const [url, me] = [params.get('ws'), params.get('me')]
+
+  const [message, setMessage] = useState<OverlayMessage>()
+  const { lastJsonMessage, readyState } = useWebSocket(url, { retryOnError: true, shouldReconnect: () => true })
+  
+  useEffect(() => {
+    if (lastJsonMessage) {
+      const msg = lastJsonMessage as unknown as OverlayMessage
+      if (msg.player === me) setMessage(msg)
+    }
+  }, [lastJsonMessage])
+
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      {message && <Inventory message={message} />}
+      <br />
+      {readyState}
+      <pre>{message && message.event}</pre>
     </div>
   );
 }

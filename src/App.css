@@ -1,38 +1,61 @@
 .App {
-  text-align: center;
+  font-family: monospace;
+  text-shadow: 1px 1px #002A00;
 }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
+img {
+  image-rendering: pixelated;
+  image-rendering: -moz-crisp-edges;
+  image-rendering: crisp-edges;
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
-}
-
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
+.inventory {
   display: flex;
   flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
+  gap: 5px;
+  width: fit-content;
 }
 
-.App-link {
-  color: #61dafb;
+.bar {
+  display: grid;
+  grid-template-columns: repeat(9, 32px);
+  gap: 2px;
 }
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+.bar .slot {
+  width: 32px;
+  height: 32px;
+  margin: 0px;
+  position: relative;
+  background-color: #8b8b8b;
+}
+
+.bar .slot figcaption {
+  position: absolute;
+  right: 2px;
+  bottom: -1px;
+  color: #fcfcfc;
+}
+
+.bar .slot img {
+  width: 32px;
+  height: 32px;
+  object-fit: cover;
+}
+
+.bar .slot .damageBack {
+  position: absolute;
+  bottom: 0px;
+
+  width: 100%;
+  height: 2px;
+  background-color: black;
+}
+
+.bar .slot .damage {
+  position: absolute;
+  bottom: 0px;
+  
+  height: 2px;
+  z-index: 1;
 }
