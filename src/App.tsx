@@ -16,7 +16,7 @@ function App() {
       const msg = lastJsonMessage as unknown as OverlayMessage
       if (msg.player === me) setMessage(msg)
     }
-  }, [lastJsonMessage])
+  }, [lastJsonMessage, me])
 
   return (
     <div className="App">

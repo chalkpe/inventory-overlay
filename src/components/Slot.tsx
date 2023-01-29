@@ -16,7 +16,7 @@ const Slot: React.FC<Props> = ({ version, content }) => {
 
     return (
         <figure className="slot">
-            <img src={mc(content.type)} />
+            <img src={mc(content.type)} alt={content.type} />
             <figcaption>{content.amount > 1 ? content.amount : ''}</figcaption>
             <Damage content={content} />
         </figure>
