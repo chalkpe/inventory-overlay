@@ -10,7 +10,7 @@ function App() {
 
   const [message, setMessage] = useState<OverlayMessage>()
   const { lastJsonMessage, readyState } = useWebSocket(url, { retryOnError: true, shouldReconnect: () => true })
-  
+
   useEffect(() => {
     if (lastJsonMessage) {
       const msg = lastJsonMessage as unknown as OverlayMessage
@@ -20,10 +20,10 @@ function App() {
 
   return (
     <div className="App">
-      {message && <Inventory message={message} />}
-      <br />
-      {readyState}
-      <pre>{message && message.event}</pre>
+      {message
+        ? <Inventory message={message} />
+        : <div>url: {url}<br />me: {me}<br />state: {readyState}</div>
+      }
     </div>
   );
 }
