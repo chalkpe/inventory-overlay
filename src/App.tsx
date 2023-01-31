@@ -4,6 +4,8 @@ import useWebSocket from 'react-use-websocket'
 import Inventory from './components/Inventory'
 import type { OverlayMessage } from './types/overlay'
 
+const states = ['connecting', '', 'closing', 'closed']
+
 function App() {
   const params = new URLSearchParams(window.location.search)
   const [url, me] = [params.get('ws'), params.get('me')]
@@ -21,7 +23,7 @@ function App() {
   return (
     <div className="App">
       {message
-        ? <Inventory message={message} />
+        ? <><Inventory message={message} /><span className="state">{states[readyState]}</span></>
         : <div>url: {url}<br />me: {me}<br />state: {readyState}</div>
       }
     </div>

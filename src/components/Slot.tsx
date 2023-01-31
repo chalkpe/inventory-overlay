@@ -1,3 +1,4 @@
+import { memo } from 'react'
 import Damage from './Damage'
 import useMinecraftAsset from '../hooks/useMinecraftAsset'
 import type { Content } from '../types/overlay'
@@ -23,4 +24,7 @@ const Slot: React.FC<Props> = ({ version, content }) => {
     )
 }
 
-export default Slot
+const fieldsAreEqual = <T extends object>(prev: T, next: T) =>
+    Object.keys(prev).every((key) => prev[key as keyof T] === next[key as keyof T])
+
+export default memo(Slot, (prev, next) => fieldsAreEqual(prev.content, next.content))

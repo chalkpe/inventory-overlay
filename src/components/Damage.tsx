@@ -20,8 +20,8 @@ const Damage: React.FC<Props> = ({ content }) => {
 
     return (
         <>
-            <div className="damage" style={styles} />
-            <div className="damageBack" />
+            <div className="damage gauge" style={styles} />
+            <div className="damage bar" />
         </>
     )
 }

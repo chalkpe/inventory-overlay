@@ -9,7 +9,7 @@ interface Props {
 const Bar: React.FC<Props> = ({ version, contents }) => {
     return (
         <nav className="bar">
-            {contents.map((c) => <Slot key={c.slot + String(c.type)} version={version} content={c} />)}
+            {contents.map((c, i) => <Slot key={i} version={version} content={c} />)}
         </nav>
     )
 }
