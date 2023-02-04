@@ -67,3 +67,24 @@ img {
 .bar .slot .damage.gauge {
   z-index: 1;
 }
+
+.debug {
+  display: grid;
+  grid-template-columns: max-content auto;
+  margin: 0.5rem;
+  font-size: 0.75rem;
+  text-shadow: none;
+}
+
+.debug dt {
+  grid-column-start: 1;
+}
+
+.debug dd::before {
+  content: "= ";
+}
+
+.debug dd {
+  grid-column-start: 2;
+  margin-left: 0.5rem;
+}

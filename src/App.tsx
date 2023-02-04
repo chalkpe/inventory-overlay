@@ -1,15 +1,17 @@
 import './App.css'
 import { useEffect, useState } from 'react'
 import useWebSocket from 'react-use-websocket'
+
+import Debug from './components/Debug'
 import Inventory from './components/Inventory'
+import useSearchParams from './hooks/useSearchParams'
+
 import type { OverlayMessage } from './types/overlay'
 
 const states = ['connecting', '', 'closing', 'closed']
 
 function App() {
-  const params = new URLSearchParams(window.location.search)
-  const [url, me] = [params.get('ws'), params.get('me')]
-
+  const { url, me } = useSearchParams()
   const [message, setMessage] = useState<OverlayMessage>()
   const { lastJsonMessage, readyState } = useWebSocket(url, { retryOnError: true, shouldReconnect: () => true })
 
@@ -22,10 +24,9 @@ function App() {
 
   return (
     <div className="App">
-      {message
-        ? <><Inventory message={message} /><span className="state">{states[readyState]}</span></>
-        : <div>url: {url}<br />me: {me}<br />state: {readyState}</div>
-      }
+      <span className="state">{states[readyState]}</span>
+      {message && <Inventory message={message} />}
+      <Debug message={message} readyState={readyState} />
     </div>
   );
 }
